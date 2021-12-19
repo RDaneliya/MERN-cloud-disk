@@ -5,7 +5,7 @@ const fileUpload = require("express-fileupload")
 const authRouter = require("./routes/auth.routes")
 const fileRouter = require("./routes/file.routes")
 const app = express()
-const PORT = config.get('serverPort')
+const PORT = process.env.PORT;
 const corsMiddleware = require('./middleware/cors.middleware')
 
 app.use(fileUpload({}))
@@ -18,7 +18,7 @@ app.use("/api/files", fileRouter)
 
 const start = async () => {
     try {
-        await mongoose.connect(config.get("dbUrl"), {
+        await mongoose.connect(process.env.DB_URL, {
             useNewUrlParser:true,
             useUnifiedTopology:true
         })
